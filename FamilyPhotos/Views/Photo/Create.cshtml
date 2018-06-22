@@ -1,0 +1,34 @@
+﻿@model FamilyPhotos.ViewModel.PhotoViewModel
+
+
+<h2>Új kép létrehozása</h2>
+
+@using (Html.BeginForm("Create", "Photo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary();
+    <div>
+        @Html.LabelFor(m => m.Title)
+        @Html.EditorFor(m => m.Title)
+        @Html.ValidationMessageFor(m => m.Title)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Description)
+        @Html.EditorFor(m => m.Description)
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.PictureFormBrowser)
+        <input type="file" name="PictureFormBrowser" />
+        @Html.ValidationMessageFor(m => m.PictureFormBrowser)
+        @*@Html.ValidationMessageFor(m => m.PictureFormBrowser)*@
+
+    </div>
+    <div>
+        <input type="submit" value="Létrehozás" />
+    </div>
+
+    <div>
+        @Html.ActionLink("Vissza", "Index");
+    </div>
+
+}

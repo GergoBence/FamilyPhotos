@@ -1,0 +1,24 @@
+﻿@model IEnumerable<FamilyPhotos.Models.PhotoModel>
+
+<h2>A fényképek listája</h2>
+
+
+@foreach (var photo in Model)
+{
+<div>
+    @if (photo.Picture != null)
+    {
+        <image src="@Url.Action("GetImage", new { photoId=photo.id})" />
+
+    }
+    <div>@photo.Title</div>
+</div>
+
+}
+
+
+<div>
+    @Html.ActionLink("Új fotó létrehozása","Create")
+</div>
+
+
