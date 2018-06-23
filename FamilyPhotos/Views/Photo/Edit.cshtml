@@ -1,0 +1,14 @@
+﻿@model FamilyPhotos.ViewModel.PhotoViewModel
+
+
+<h2>Kép szerkesztése</h2>
+
+@using (Html.BeginForm("Edit", "Photo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m=>m.id)
+    @Html.EditorForModel()
+    <div>
+        <input type="submit" value="Módosítás" />
+    </div>
+
+}

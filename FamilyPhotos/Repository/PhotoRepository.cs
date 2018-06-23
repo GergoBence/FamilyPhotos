@@ -27,5 +27,16 @@ namespace FamilyPhotos.Repository
             model.id = id++;
             data.Add(model);
         }
+
+        public void UpdatePhoto(PhotoModel model)
+        {
+            var oldModel = data.SingleOrDefault(x => x.id == model.id);
+            //oldModel.Title = model.Title;  ezt kellene, de az automapper megoldja. helyett:
+            if (oldModel!=null)
+            {
+                data.Remove(oldModel);
+                data.Add(model);
+            }
+        }
     }
 }
