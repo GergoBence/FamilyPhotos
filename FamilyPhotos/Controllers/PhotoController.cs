@@ -1,4 +1,5 @@
-﻿using FamilyPhotos.Models;
+﻿using AutoMapper;
+using FamilyPhotos.Models;
 using FamilyPhotos.Repository;
 using FamilyPhotos.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +13,21 @@ namespace FamilyPhotos.Controllers
     public class PhotoController : Controller
     {
         private PhotoRepository repository;
+        private IMapper mapper;
 
-        public PhotoController (PhotoRepository repository)
+        public PhotoController (PhotoRepository repository, IMapper mapper)
         {
             if (repository==null)
             {
                 throw new ArgumentNullException(nameof(repository));
             }
             this.repository = repository;
+
+            if (mapper==null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+            this.mapper = mapper;
         }
         
 
@@ -28,6 +36,14 @@ namespace FamilyPhotos.Controllers
             var pics=repository.GetAllPhotos();
 
             return View(pics);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var model = repository.GetPicture(id);
+            var viewModel = mapper.Map<PhotoViewModel>(model);
+
+            return View(viewModel);
         }
 
         public FileContentResult GetImage(int photoId)
@@ -59,13 +75,7 @@ namespace FamilyPhotos.Controllers
                 //A View-t fel kell készíteni a hibainformációk megjelenítésére
                 return View(viewModel);
             }
-
-
-                    
-            var autoMapperCfg = new AutoMapper.MapperConfiguration(
-                    cfg=>cfg.AddProfile(new PhotoProfile()));
-            var mapper = autoMapperCfg.CreateMapper();
-
+                             
             var model = mapper.Map<PhotoModel>(viewModel);
 
             //Több profil betöltése

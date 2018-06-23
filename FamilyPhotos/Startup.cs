@@ -18,6 +18,13 @@ namespace FamilyPhotos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<PhotoRepository, PhotoRepository>();
+
+            var autoMapperCfg = new AutoMapper.MapperConfiguration(
+            cfg => cfg.AddProfile(new ViewModel.PhotoProfile()));
+            var mapper = autoMapperCfg.CreateMapper();
+
+            services.AddSingleton(mapper);  //innentől kérhetem a controller paraméter listájában
+
             services.AddMvc();
         }
 

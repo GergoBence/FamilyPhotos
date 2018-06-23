@@ -27,6 +27,8 @@ namespace FamilyPhotos.ViewModel
                             })
                 ;
 
+            CreateMap<PhotoModel, PhotoViewModel>();
+
             ////el kel lvégeznünk a viewModel => Model transzformációt
             //var model = new PhotoModel();
 
