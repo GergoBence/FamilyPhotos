@@ -38,5 +38,14 @@ namespace FamilyPhotos.Repository
                 data.Add(model);
             }
         }
+
+        internal void DeletePhoto(int id)
+        {
+            var oldModel = data.SingleOrDefault(x => x.id == id);
+            if (oldModel != null)
+            {
+                data.Remove(oldModel);
+            }
+        }
     }
 }
