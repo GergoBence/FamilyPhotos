@@ -1,26 +1,8 @@
 ﻿@model FamilyPhotos.ViewModel.PhotoViewModel
 
+<h2>kép megtekintése</h2>
 
-<h2>Kép megtekintése</h2>
 
+@Html.DisplayForModel()
 
-<div>
-    @Html.LabelFor(m => m.Title)
-    @Html.DisplayFor(m => m.Title)
-</div>
-<div>
-    @Html.LabelFor(m => m.Description)
-    @Html.DisplayFor(m => m.Description)
-</div>
-<div>
-    @Html.LabelFor(m => m.PictureFormBrowser)
-    @if (Model!=null)
-    {
-        <image src="@Url.Action("GetImage", new { photoId=Model.id})" />
-    }    
-</div>
-
-<div>
-    @Html.ActionLink("Vissza", "Index");
-</div>
-
+@Html.ActionLink("Vissza","Index")
