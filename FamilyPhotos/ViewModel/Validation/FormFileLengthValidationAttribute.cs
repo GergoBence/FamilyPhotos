@@ -15,7 +15,7 @@ namespace FamilyPhotos.ViewModel.Validation
             if (file==null)
             {
                 return false;
-            }
+            } 
             return file.Length > 0;
         }
     }

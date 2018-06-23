@@ -61,12 +61,13 @@ namespace FamilyPhotos.Controllers
             }
             //el kel lvégeznünk a viewModel => Model transzformációt
             var model = new PhotoModel();
-
+            
             model.Title = viewModel.Title;
             model.Description = viewModel.Description;
             model.ContentType = viewModel.PictureFormBrowser.ContentType;
 
             model.Picture = new byte[viewModel.PictureFormBrowser.Length];
+            
             using (var stream = viewModel.PictureFormBrowser.OpenReadStream())
             {
                 stream.Read(model.Picture, 0,(int) viewModel.PictureFormBrowser.Length);
