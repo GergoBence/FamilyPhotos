@@ -59,19 +59,25 @@ namespace FamilyPhotos.Controllers
                 //A View-t fel kell készíteni a hibainformációk megjelenítésére
                 return View(viewModel);
             }
-            //el kel lvégeznünk a viewModel => Model transzformációt
-            var model = new PhotoModel();
-            
-            model.Title = viewModel.Title;
-            model.Description = viewModel.Description;
-            model.ContentType = viewModel.PictureFormBrowser.ContentType;
 
-            model.Picture = new byte[viewModel.PictureFormBrowser.Length];
-            
-            using (var stream = viewModel.PictureFormBrowser.OpenReadStream())
-            {
-                stream.Read(model.Picture, 0,(int) viewModel.PictureFormBrowser.Length);
-            }
+
+                    
+            var autoMapperCfg = new AutoMapper.MapperConfiguration(
+                    cfg=>cfg.AddProfile(new PhotoProfile()));
+            var mapper = autoMapperCfg.CreateMapper();
+
+            var model = mapper.Map<PhotoModel>(viewModel);
+
+            //Több profil betöltése
+            //var autoMapperCfg = new AutoMapper.MapperConfiguration(
+            //        cfg => {
+            //            cfg.AddProfile(new PhotoProfile());
+            //            cfg.AddProfile(new PhotoProfile());
+            //            cfg.AddProfile(new PhotoProfile());
+            //            cfg.AddProfile(new PhotoProfile());
+            //        });
+
+
 
             //viewModel.ContentType = viewModel.PictureFormBrowser.ContentType;
             repository.AddPhoto(model);

@@ -11,7 +11,7 @@ namespace FamilyPhotos.Repository
         //private List<PhotoModel> data = new List<PhotoModel> { new PhotoModel {id=1, Title = "Egy Kép" } };
         private List<PhotoModel> data = new List<PhotoModel>();
         int id = 0;
-
+         
         public IEnumerable<PhotoModel> GetAllPhotos()
         {
             return data;

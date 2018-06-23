@@ -57,8 +57,15 @@ namespace FamilyPhotos
     ///     
     ///    - Ha érvényes akkor a modellt feldolgozzuk (elmentjük, módosítjuk amit kell, stb.)
     ///     
+    /// rendes: 
+    ///    megjelenítés <---- (ViewModel) <---- (transzformáció(robotmunka)) <---- (model) <----(repository) <----(adattárolás)
+    ///    transzformáció neve automapper
+    /// 
+    ///     automapper üzembehelyezéséhez kell:
+    ///         -profile, a konstruktorban van a transzformációs definíció
+    ///         -ezt be kell tölteni
     /// </summary>
-    
+
 
 
 
