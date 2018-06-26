@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+
 namespace FamilyPhotos
 {
     public class Startup
@@ -36,11 +37,28 @@ namespace FamilyPhotos
             {
                 app.UseDeveloperExceptionPage();
             }
+            /// ha nem csak egyszerű stástusz kóddal akarunk válaszolni, hanem
+            /// szeretnénk egyszerű információkat adni, akkor például így tudunk
+            /// 400-599 közötti küdokhoz megoldást
+            /// de csak, ha például a kivételt előtte kezeltük és a stástuszkóddal térünk vissza
+            /// az action-ből
 
-            //app.Run(async (context) =>
+            //alapértelmezés
+            //app.UseStatusCodePages();
+
+            //különböző beállítási lehetőségek
+            //app.UseStatusCodePages("text/plain","Ez egy hibás kérés, a kód: {0}");
+            //app.UseStatusCodePages(async context =>
             //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
+            //    context.HttpContext.Response.ContentType = "text/plain";
+            //    await  context.HttpContext.Response.WriteAsync($"Ez a UseStatusCodePages delegate settings, a kód pedig: {context.HttpContext.Response.StatusCode}");
+
+            //}); 
+
+            //például átirányíthatjuk saját oldalra
+            //app.UseStatusCodePagesWithRedirects("~/Errors/StatusCodeWithRedirects/{0}");
+
+            app.UseStatusCodePagesWithReExecute("/Errors/UseStatusCodePagesWithReExecute", "?statusCode={0}");
 
             app.UseMvcWithDefaultRoute();
         }

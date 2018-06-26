@@ -77,7 +77,11 @@ namespace FamilyPhotos
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args).UseUrls("http://*:1000")
-                .UseStartup<Startup>();
+            WebHost
+            .CreateDefaultBuilder(args)
+            .UseUrls("http://*:1000")
+            .CaptureStartupErrors(true)   //alapértelmezésben false, kivéve a developement környezetben
+             .UseSetting("detailedErrors","true")
+            .UseStartup<Startup>();
     }
 }
