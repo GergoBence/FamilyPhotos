@@ -7,9 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static FamilyPhotos.Filters.MyExceptionFilter;
 
 namespace FamilyPhotos.Controllers
 {
+
+    [MyExceptionFilter2(2)]
+    [MyExceptionFilter3(Order =1)]
     public class PhotoController : Controller
     {
         private PhotoRepository repository;
@@ -146,6 +150,19 @@ namespace FamilyPhotos.Controllers
                 //akkor a StatusCodePage megjelenik a felhasználónál 
                 return StatusCode(500);
             }
+        }
+        public IActionResult EzEgyKivetel()
+        {
+            throw new Exception("Itt a hiba"); //ezt a Startup.cs-ben beállított exception handler segít lekezelni
+
+            //try
+            //{
+            //    throw new Exception("Itt a hiba");
+            //}
+            //catch (Exception)
+            //{
+            //    return RedirectToAction("kivetel","Errors");
+            //}
         }
     }
 }

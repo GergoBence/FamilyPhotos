@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<FamilyPhotos.Models.PhotoModel>
 
+@*specifikus layout használat*@
+ @*@{
+     Layout = "~/Views/Shared/_Layout.cshtml";
+ }*@
+
 <h2>A fényképek listája</h2>
 
 
@@ -27,5 +32,3 @@
 <div>
     @Html.ActionLink("Új fotó létrehozása","Create")
 </div>
-
-

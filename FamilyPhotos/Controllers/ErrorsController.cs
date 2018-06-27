@@ -33,9 +33,13 @@ namespace FamilyPhotos.Controllers
                 {
                     model.OriginalQueryString = featureReExecute.OriginalQueryString;
                 }
-            }
-
+            }            
             return View(model);
+        }
+
+        public IActionResult ExceptionHandler()
+        {
+            return View();
         }
     }
 }

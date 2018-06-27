@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
+using FamilyPhotos.Filters;
 using FamilyPhotos.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +28,10 @@ namespace FamilyPhotos
 
             services.AddSingleton(mapper);  //innentől kérhetem a controller paraméter listájában
 
-            services.AddMvc();
+            services.AddMvc(o =>
+            {
+                //o.Filters.Add(new MyExceptionFilter());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +64,10 @@ namespace FamilyPhotos
             //app.UseStatusCodePagesWithRedirects("~/Errors/StatusCodeWithRedirects/{0}");
 
             app.UseStatusCodePagesWithReExecute("/Errors/UseStatusCodePagesWithReExecute", "?statusCode={0}");
+
+            //hibakezelés saját action-nel (middleware):
+            //app.UseExceptionHandler("/Errors"); //Ez így a Errors/Index-re
+            app.UseExceptionHandler("/Errors/ExceptionHandler");
 
             app.UseMvcWithDefaultRoute();
         }
