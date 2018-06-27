@@ -69,6 +69,9 @@ namespace FamilyPhotos
             //app.UseExceptionHandler("/Errors"); //Ez így a Errors/Index-re
             app.UseExceptionHandler("/Errors/ExceptionHandler");
 
+            //statikus fájlok kiszolgálása (most a boostrap stlye-hoz)
+            app.UseStaticFiles();
+
             app.UseMvcWithDefaultRoute();
         }
     }

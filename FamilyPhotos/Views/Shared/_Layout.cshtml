@@ -3,13 +3,15 @@
 <head>
 
     <title>A fotóalbum</title>
-        <style type="text/css">
-            body {
-                background-color: silver;
-            }
-        </style>
-   @RenderSection("style", required: false)
+    @*<style type="text/css">
+                body {
+                    background-color: silver;
+                }
+            </style>
+        @RenderSection("style", required: false)*@
 
+    
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
     @RenderBody()
