@@ -4,7 +4,7 @@
 
     <title>A fotóalbum</title>
     @*<style type="text/css">
-                body {
+                body { 
                     background-color: silver;
                 }
             </style>
@@ -24,9 +24,13 @@
         }
     </style>*@
 </head>
-<body>
+<body class="coral kiveteles">
+
     @RenderBody()
+    <script type="text/javascript" src="~/script/jquery.js"></script>
+    @RenderSection("script",false)
 </body>
+
 </html>
     
 
