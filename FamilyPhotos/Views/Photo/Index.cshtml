@@ -9,31 +9,34 @@
 
 <h2>A fényképek listája</h2>
 
-
-@foreach (var photo in Model)
-{
-<div>
-    @if (photo.Picture != null)
+<ul>
+    @foreach (var photo in Model)
     {
-        <image src="@Url.Action("GetImage", new { photoId=photo.id})" />
+        <li class="list-group-item">
+            <div class="media">
+                <div class="media-left media-middle">
+                   @if (photo.Picture != null)
+                    {
+                      <img src="@Url.Action("GetImage", new { photoId=photo.id})" class="media-object" width="100"/>
+                    }
+
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">@photo.Title</h4>
+                    <div><small><i>@photo.Description</i></small></div>
+                    @Html.ActionLink("Megtekintés", "Details", new { id = photo.id }, htmlAttributes: new { @class = "btn btn-success" }) @*routingnak átadjuk az id paramétert*@
+                    @Html.ActionLink("Módosítás", "Edit", new { id = photo.id }, htmlAttributes: new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Törlés", "Delete", new { id = photo.id }, htmlAttributes: new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </li>
 
     }
-    <div>@photo.Title</div>
-    <div><small><i>@photo.Description</i></small></div>
-    @Html.ActionLink("Megtekintés", "Details", new { id = photo.id }) //routingnak átadjuk az id paramétert
-    @Html.ActionLink("Módosítás", "Edit", new { id = photo.id })
-    @Html.ActionLink("Törlés", "Delete", new { id = photo.id })
-
-
-
-</div>
-
-}
-
+</ul>
 
 <div>
     @*ahhoz hogy a html class propertyjébe írjuk a btn btn-danger értéket cselezni kell a @-al*@
-    @Html.ActionLink("Új fotó létrehozása", "Create", null, htmlAttributes: new {@class="btn btn-danger" } )
+    @Html.ActionLink("Új fotó létrehozása", "Create", null, htmlAttributes: new {@class="btn btn-primary" } )
     @*<a href="/Photo/Create" class="btn btn-danger">&#xDA;j fot&#xF3; l&#xE9;trehoz&#xE1;sa</a>*@
 
 </div>

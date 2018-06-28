@@ -1,23 +1,18 @@
 ﻿@model FamilyPhotos.ViewModel.PhotoViewModel
-@*@{
-    Layout = "_Layout2";
-}*@
 
-<h2>Új kép létrehozása</h2>
 
-@using (Html.BeginForm("Create", "Photo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+<div class="page-header">
+    <h2>Új kép létrehozása</h2>
+</div>
+
+@using (Html.BeginForm("Create", "Photo", FormMethod.Post, new { enctype = "multipart/form-data", @class="form-horizontal" }))
 {
     @Html.EditorForModel()
-    <div>
-        <input type="submit" value="Létrehozás" />
-    </div>
+<div class=" col-md-offset-2">
+    @Html.ActionLink("Vissza", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+    <input type="submit" value="Létrehozás" class="btn btn-primary" />
+</div>
 
 }
 
-@*@section style{
-    <style type="text/css">
-        body {
-            background-color: burlywood;
-        }
-    </style>
-}*@

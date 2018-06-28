@@ -1,14 +1,20 @@
 ﻿@model FamilyPhotos.ViewModel.PhotoViewModel
 
 
-<h2>Kép törlése</h2>
+<div class="page-header">
+    <h2>Kép törlése</h2>
+</div>
 
-@using (Html.BeginForm())
+
+
+@using (Html.BeginForm(FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))
 {
     @Html.HiddenFor(m => m.id)
     @Html.DisplayForModel()
-    <div>
-        <input type="submit" value="Törlés" />
-    </div>
+<div class="col-md-5 offset-1">
+    @Html.ActionLink("Vissza", "Index", null, htmlAttributes: new { @class = "btn btn-primary" })
+    <input type="submit" value="Törlés" class="btn btn-danger col-md-2" />
+</div>
 
 }
+
