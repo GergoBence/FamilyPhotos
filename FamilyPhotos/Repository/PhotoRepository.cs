@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FamilyPhotos.Repository
 {
-    public class PhotoRepository
+    public class PhotoTestDataRepository : IPhotoRepository
     {
         //private List<PhotoModel> data = new List<PhotoModel> { new PhotoModel {id=1, Title = "Egy Kép" } };
         private List<PhotoModel> data = new List<PhotoModel>();
@@ -46,6 +46,11 @@ namespace FamilyPhotos.Repository
             {
                 data.Remove(oldModel);
             }
+        }
+
+        void IPhotoRepository.DeletePhoto(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -34,6 +34,7 @@ namespace FamilyPhotos.Models
 
         public byte[] Picture { get; set; }
 
+        [StringLength(255)]
         public string ContentType { get;  set; }
     }
 }

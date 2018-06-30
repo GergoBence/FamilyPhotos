@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -18,6 +19,19 @@ namespace FamilyPhotos
 {
     public class Startup
     {
+        private readonly IConfigurationRoot Configuration;
+
+        public Startup(IHostingEnvironment enviroment)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(enviroment.ContentRootPath)
+                .AddJsonFile("appsettings.json",optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{enviroment.EnvironmentName}.json", optional:true)
+                .AddEnvironmentVariables()
+                ;
+            Configuration = builder.Build();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -25,10 +39,17 @@ namespace FamilyPhotos
             //beüzemeljük az EntityFramework Core eszközeit
             services.AddDbContext<FamilyPhotosContext>(options =>
             {
-                options.UseSqlServer("Server=(LocalDB)\\localDBDemo;Database= ;Trusted_Connection=True;");
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+
+                //options.UseSqlServer("Server=(LocalDB)\\localDBDemo;Database=FamilyPhotosDB;Trusted_Connection=True;");
+                //options.UseSqlServer("Server=(LocalDB)\\localDBDemo; Initial Catalog = FamilyPhotosDB; Integrated Security = True;");
+                //options.UseSqlServer("Server=(LocalDB)\\localDBDemo;Database=FamilyPhotosDB;Trusted_Connection=True;");
+
             });
 
-            services.AddSingleton<PhotoRepository, PhotoRepository>();
+
+            //services.AddSingleton<IPhotoRepository, PhotoTestDataRepository>();
+            services.AddSingleton<IPhotoRepository, PhotoEfCoreDataRepository>();
 
             var autoMapperCfg = new AutoMapper.MapperConfiguration(
             cfg => cfg.AddProfile(new ViewModel.PhotoProfile()));

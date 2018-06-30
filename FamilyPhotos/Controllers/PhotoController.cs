@@ -16,10 +16,10 @@ namespace FamilyPhotos.Controllers
     [MyExceptionFilter3(Order =1)]
     public class PhotoController : Controller
     {
-        private PhotoRepository repository;
+        private IPhotoRepository repository;
         private IMapper mapper;
 
-        public PhotoController (PhotoRepository repository, IMapper mapper)
+        public PhotoController (IPhotoRepository repository, IMapper mapper)
         {
             if (repository==null)
             {

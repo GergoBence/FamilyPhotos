@@ -22,7 +22,7 @@ namespace FamilyPhotos.Data
         }
 
 
-        DbSet<PhotoModel> Photos { get; set; }
+        public DbSet<PhotoModel> Photos { get; set; }
 
 
     }
