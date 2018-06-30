@@ -25,7 +25,7 @@ namespace FamilyPhotos
             //beüzemeljük az EntityFramework Core eszközeit
             services.AddDbContext<FamilyPhotosContext>(options =>
             {
-                options.UseSqlServer("Server=(LocalDB)\\localDBDemo;Database=FamilyPhotosDB;Trusted_Connection=True;");
+                options.UseSqlServer("Server=(LocalDB)\\localDBDemo;Database= ;Trusted_Connection=True;");
             });
 
             services.AddSingleton<PhotoRepository, PhotoRepository>();
